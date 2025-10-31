@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Memory Game - Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            color: white;
+        }
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .demo-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .game-button {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #2d3748;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .game-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #ffecd2;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-card">
+            <div class="emoji">🧠</div>
+            <h1>Mobile Number Memory Game</h1>
+            <p>Challenge your memory with three exciting game modes!</p>
+            <a href="index.html" class="game-button">🎮 Play Game</a>
+        </div>
+
+        <div class="demo-card">
+            <h2>🎯 Game Modes</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="emoji">📱</div>
+                    <h3>Recall Mode</h3>
+                    <p>"Who's Number?"</p>
+                    <p>Remember which number belongs to which contact. Add your friends and family, then test your memory!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">🔢</div>
+                    <h3>Missing Digits</h3>
+                    <p>"Fill the Missing 5"</p>
+                    <p>Memorize a number, then fill in the missing digits. Choose from Easy, Medium, or Hard difficulty!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">🎯</div>
+                    <h3>Sequence Recall</h3>
+                    <p>"Progressive Challenge"</p>
+                    <p>Remember increasing sequences of phone numbers. Each level gets harder with more numbers!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h2>✨ Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="emoji">🏆</div>
+                    <h4>Best Score Tracking</h4>
+                    <p>Your high scores are saved locally and displayed on the main menu</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">📱</div>
+                    <h4>Mobile Responsive</h4>
+                    <p>Perfect gameplay experience on both desktop and mobile devices</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">🎨</div>
+                    <h4>Beautiful Design</h4>
+                    <p>Modern UI with smooth animations and attractive gradients</p>
+                </div>
+                <div class="feature-card">
+                    <div class="emoji">💾</div>
+                    <h4>Persistent Storage</h4>
+                    <p>Your contacts and scores are saved between sessions</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-card">
+            <h2>🚀 Ready for GitHub</h2>
+            <p>This game is ready to deploy on GitHub Pages!</p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>✅ No backend required - runs entirely in browser</li>
+                <li>✅ All files included (HTML, CSS, JS)</li>
+                <li>✅ Cross-browser compatible</li>
+                <li>✅ Comprehensive README included</li>
+                <li>✅ Modern responsive design</li>
+            </ul>
+            <br>
+            <a href="index.html" class="game-button">🎮 Start Playing Now!</a>
+        </div>
+    </div>
+</body>
+</html>

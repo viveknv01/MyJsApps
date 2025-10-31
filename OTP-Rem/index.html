@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🧠 OTP Memory Challenge</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-animation">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    <div class="floating-shape shape-4"></div>
+  </div>
+
+  <div class="game-container">
+    <header class="game-header">
+      <div class="header-icon">🧠</div>
+      <h1>OTP Memory Challenge</h1>
+      <p>Test your memory with number sequences!</p>
+    </header>
+
+    <div class="top-controls">
+      <button class="back-btn" onclick="goHome()">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      
+      <div class="stats-panel">
+        <div class="stat-item">
+          <i class="fas fa-trophy"></i>
+          <span>Score</span>
+          <div id="score" class="stat-value">0</div>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-fire"></i>
+          <span>Streak</span>
+          <div id="streak" class="stat-value">0</div>
+        </div>
+        <div class="stat-item">
+          <i class="fas fa-clock"></i>
+          <span>Level</span>
+          <div id="level" class="stat-value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-area">
+      <div id="otpDisplay" class="otp-display">
+        <div class="otp-placeholder">
+          <i class="fas fa-play"></i>
+          <span>Click Start to Begin</span>
+        </div>
+      </div>
+
+      <div class="input-section">
+        <div class="input-wrapper">
+          <input type="text" id="otpInput" placeholder="Enter the numbers you remember..." disabled maxlength="12" />
+          <button id="submitBtn" class="submit-btn" disabled>
+            <i class="fas fa-check"></i>
+          </button>
+        </div>
+        
+        <div class="timer-container">
+          <div id="timer" class="timer-bar">
+            <div class="timer-fill"></div>
+          </div>
+          <span id="timerText" class="timer-text">Ready</span>
+        </div>
+      </div>
+
+      <div id="message" class="message-area"></div>
+    </div>
+
+    <div class="game-controls">
+      <button id="startBtn" class="primary-btn" onclick="startGame()">
+        <i class="fas fa-play"></i>
+        <span>Start Game</span>
+      </button>
+      
+      <button id="resetBtn" class="secondary-btn" onclick="resetGame()">
+        <i class="fas fa-refresh"></i>
+        <span>Reset</span>
+      </button>
+    </div>
+
+    <div class="compact-settings">
+      <div class="settings-row">
+        <div class="setting-compact">
+          <i class="fas fa-hashtag"></i>
+          <span>Digits:</span>
+          <input type="range" id="otpLength" min="3" max="12" value="6" class="compact-slider">
+          <span id="digitsDisplay" class="compact-value">6</span>
+        </div>
+        
+        <div class="setting-compact">
+          <i class="fas fa-eye"></i>
+          <span>Time:</span>
+          <select id="displayTime" class="compact-select">
+            <option value="2000">2s</option>
+            <option value="3000" selected>3s</option>
+            <option value="5000">5s</option>
+            <option value="7000">7s</option>
+          </select>
+        </div>
+        
+        <div class="setting-compact">
+          <i class="fas fa-volume-up"></i>
+          <span>Sound:</span>
+          <label class="compact-toggle">
+            <input type="checkbox" id="soundToggle" checked>
+            <span class="compact-toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="difficulty-badges">
+      <div class="badge" data-level="easy">
+        <i class="fas fa-seedling"></i>
+        <span>Easy</span>
+      </div>
+      <div class="badge" data-level="medium">
+        <i class="fas fa-fire"></i>
+        <span>Medium</span>
+      </div>
+      <div class="badge" data-level="hard">
+        <i class="fas fa-bolt"></i>
+        <span>Hard</span>
+      </div>
+      <div class="badge" data-level="expert">
+        <i class="fas fa-crown"></i>
+        <span>Expert</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="successModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon success">
+        <i class="fas fa-trophy"></i>
+      </div>
+      <h3>Excellent Memory!</h3>
+      <p>You got it right!</p>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <span class="stat-label">Points Earned</span>
+          <span id="pointsEarned" class="stat-number">+100</span>
+        </div>
+      </div>
+      <button class="modal-btn" onclick="closeModal()">Continue</button>
+    </div>
+  </div>
+
+  <div id="failModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-icon fail">
+        <i class="fas fa-times"></i>
+      </div>
+      <h3>Almost There!</h3>
+      <p id="failMessage">Keep practicing to improve your memory!</p>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <span class="stat-label">Correct Answer</span>
+          <span id="correctAnswer" class="stat-number">123456</span>
+        </div>
+      </div>
+      <button class="modal-btn" onclick="closeModal()">Try Again</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

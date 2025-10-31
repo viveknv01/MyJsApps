@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧠📱🔢✍️ Memory Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Home Button -->
+        <button class="home-button" onclick="goToMainHome()" title="Back to Projects">
+            🏠 Home
+        </button>
+        
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="header">
+                <div class="animated-title">
+                    <span class="title-icon">🧠</span>
+                    <h1 class="title-text">
+                        <span class="word">Mobile</span>
+                        <span class="word">Number</span>
+                        <span class="word">Memory</span>
+                        <span class="word">Game</span>
+                    </h1>
+                </div>
+                <p class="subtitle">Challenge your memory with phone numbers!</p>
+            </div>
+            
+            <div class="score-display">
+                <div class="score-card">
+                    <h3>Best Scores</h3>
+                    <div class="scores">
+                        <div class="score-item">
+                            <span>Recall Mode:</span>
+                            <span id="best-score-1">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Missing Digits:</span>
+                            <span id="best-score-2">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Sequence Recall:</span>
+                            <span id="best-score-3">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Complete Input:</span>
+                            <span id="best-score-4">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-management">
+                <div class="management-card" onclick="showContactManager()">
+                    <div class="mode-icon">📞</div>
+                    <h3>Manage Contacts</h3>
+                    <p>Add, view, and manage your mobile numbers</p>
+                </div>
+            </div>
+
+            <div class="mode-selection">
+                <div class="mode-card" onclick="selectMode(1)">
+                    <div class="mode-icon">📱</div>
+                    <h3>Recall Mode</h3>
+                    <p>"Who's Number?"</p>
+                    <p class="mode-desc">Remember which number belongs to which contact</p>
+                </div>
+                
+                <div class="mode-card" onclick="selectMode(2)">
+                    <div class="mode-icon">🔢</div>
+                    <h3>Missing Digits</h3>
+                    <p>"Fill the Missing 5"</p>
+                    <p class="mode-desc">Memorize a number, then fill in the missing digits</p>
+                </div>
+                
+                <div class="mode-card" onclick="selectMode(3)">
+                    <div class="mode-icon">🎯</div>
+                    <h3>Sequence Recall</h3>
+                    <p>"Progressive Challenge"</p>
+                    <p class="mode-desc">Remember increasing sequences of phone numbers</p>
+                </div>
+                
+                <div class="mode-card" onclick="selectMode(4)">
+                    <div class="mode-icon">✍️</div>
+                    <h3>Complete Input</h3>
+                    <p>"Type the Full Number"</p>
+                    <p class="mode-desc">No hints, no options - just type the complete number!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Manager Screen -->
+        <div id="contact-manager" class="screen">
+            <div class="header">
+                <h2>� Contact Manager</h2>
+                <p>Manage your mobile numbers for the games</p>
+            </div>
+            
+            <div class="contact-manager-container">
+                <div class="contact-form">
+                    <input type="text" id="manager-contact-name" placeholder="Contact Name (e.g., John)">
+                    <input type="tel" id="manager-contact-number" placeholder="Mobile Number (10 digits)" maxlength="10">
+                    <div class="form-actions">
+                        <button onclick="addContactFromManager()">Add Contact</button>
+                        <button onclick="pasteContacts()" class="secondary">Paste Contacts</button>
+                    </div>
+                </div>
+                
+                <div class="contacts-list">
+                    <div class="contacts-header">
+                        <h3>Your Contacts (<span id="manager-contact-count">0</span>)</h3>
+                        <div class="contacts-actions">
+                            <button onclick="copyAllContacts()" class="copy-btn">📋 Copy All</button>
+                            <button onclick="generateRandomContacts()" class="random-btn">🎲 Add Random</button>
+                        </div>
+                    </div>
+                    <div id="manager-contacts-display"></div>
+                </div>
+                
+                <div class="backup-section">
+                    <h4>📦 Backup & Restore</h4>
+                    <div class="backup-actions">
+                        <button onclick="downloadBackup()" class="backup-btn">💾 Download Backup</button>
+                        <button onclick="uploadBackup()" class="restore-btn">📁 Upload Backup</button>
+                        <button onclick="showLastBackup()" class="info-btn">ℹ️ Last Backup Info</button>
+                    </div>
+                    <input type="file" id="backup-file-input" accept=".json" style="display: none;" onchange="restoreFromFile(event)">
+                    <div id="backup-info" class="backup-info"></div>
+                </div>
+                
+                <div class="manager-actions">
+                    <button onclick="goHome()" class="secondary">Back to Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mode 1: Recall Mode Setup -->
+        <div id="mode1-setup" class="screen">
+            <div class="header">
+                <h2>📱 Recall Mode</h2>
+                <p>Ready to test your memory?</p>
+            </div>
+            
+            <div class="setup-container">
+                <div class="contacts-list">
+                    <h3>Available Contacts (<span id="setup-contact-count">0</span>)</h3>
+                    <div id="setup-contacts-display"></div>
+                </div>
+                
+                <div class="setup-actions">
+                    <button onclick="startMode1()" id="start-mode1" disabled>Start Game (Need 3+ contacts)</button>
+                    <button onclick="showContactManager()" class="secondary">Manage Contacts</button>
+                    <button onclick="goHome()" class="secondary">Back to Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mode 1: Recall Game -->
+        <div id="mode1-game" class="screen">
+            <div class="game-header">
+                <div class="score">Score: <span id="mode1-score">0</span></div>
+                <div class="question-counter">Question <span id="current-question">1</span> of <span id="total-questions">10</span></div>
+            </div>
+            
+            <div class="question-container">
+                <h2 id="question-text">What is John's number?</h2>
+                
+                <div class="answer-options" id="answer-options">
+                    <!-- Options will be dynamically generated -->
+                </div>
+                
+                <div class="feedback" id="mode1-feedback"></div>
+            </div>
+            
+            <button onclick="nextQuestion()" id="next-question" style="display: none;">Next Question</button>
+            <button onclick="finishMode1()" id="finish-mode1" style="display: none;">Finish Game</button>
+            <button onclick="goHome()" class="secondary">Back to Menu</button>
+        </div>
+
+        <!-- Mode 2: Missing Digits Setup -->
+        <div id="mode2-setup" class="screen">
+            <div class="header">
+                <h2>🔢 Missing Digits Challenge</h2>
+                <p>Choose your difficulty!</p>
+            </div>
+            
+            <div class="difficulty-selection">
+                <div class="difficulty-card" onclick="startMode2('easy')">
+                    <h3>Easy</h3>
+                    <p>3 missing digits</p>
+                    <p>5 seconds viewing time</p>
+                    <p class="requirement">Uses your saved contacts</p>
+                </div>
+                
+                <div class="difficulty-card" onclick="startMode2('medium')">
+                    <h3>Medium</h3>
+                    <p>5 missing digits</p>
+                    <p>3 seconds viewing time</p>
+                    <p class="requirement">Uses your saved contacts</p>
+                </div>
+                
+                <div class="difficulty-card" onclick="startMode2('hard')">
+                    <h3>Hard</h3>
+                    <p>7 missing digits</p>
+                    <p>2 seconds viewing time</p>
+                    <p class="requirement">Uses your saved contacts</p>
+                </div>
+            </div>
+            
+            <div class="mode2-options">
+                <button onclick="showContactManager()" class="secondary">Manage Contacts</button>
+                <button onclick="goHome()" class="secondary">Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Mode 2: Missing Digits Game -->
+        <div id="mode2-game" class="screen">
+            <div class="game-header">
+                <div class="score">Score: <span id="mode2-score">0</span></div>
+                <div class="timer">Time: <span id="mode2-timer">0</span>s</div>
+                <div class="round">Round <span id="mode2-round">1</span></div>
+            </div>
+            
+            <div class="memorize-container">
+                <h2>Memorize this number:</h2>
+                <div class="number-display" id="number-to-memorize">9876543210</div>
+                <div class="countdown" id="memorize-countdown">3</div>
+            </div>
+            
+            <div class="input-container" id="input-container" style="display: none;">
+                <h2>Fill in the missing digits:</h2>
+                <div class="number-input" id="number-with-blanks">987_5_32_0</div>
+                <div class="digit-inputs" id="digit-inputs">
+                    <!-- Input fields will be generated dynamically -->
+                </div>
+                <button onclick="submitMode2Answer()">Submit Answer</button>
+            </div>
+            
+            <div class="feedback" id="mode2-feedback"></div>
+            <button onclick="nextRoundMode2()" id="next-round-mode2" style="display: none;">Next Round</button>
+            <button onclick="finishMode2()" id="finish-mode2" style="display: none;">Finish Game</button>
+            <button onclick="goHome()" class="secondary">Back to Menu</button>
+        </div>
+
+        <!-- Mode 4: Complete Input Setup -->
+        <div id="mode4-setup" class="screen">
+            <div class="header">
+                <h2>✍️ Complete Input Challenge</h2>
+                <p>The ultimate memory test - no hints, just pure recall!</p>
+            </div>
+            
+            <div class="setup-container">
+                <div class="mode4-info">
+                    <div class="challenge-description">
+                        <h3>🧠 How it works:</h3>
+                        <ul>
+                            <li>We'll ask "What is [Name]'s number?"</li>
+                            <li>Type the complete 10-digit number</li>
+                            <li>No multiple choice, no hints!</li>
+                            <li>Higher points for pure memory recall</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="difficulty-options">
+                        <h3>Choose your challenge:</h3>
+                        <div class="mode4-difficulty">
+                            <div class="difficulty-card" onclick="startMode4('easy')">
+                                <h4>Easy</h4>
+                                <p>5 questions</p>
+                                <p>20 points each</p>
+                            </div>
+                            
+                            <div class="difficulty-card" onclick="startMode4('medium')">
+                                <h4>Medium</h4>
+                                <p>10 questions</p>
+                                <p>25 points each</p>
+                            </div>
+                            
+                            <div class="difficulty-card" onclick="startMode4('hard')">
+                                <h4>Hard</h4>
+                                <p>15 questions</p>
+                                <p>30 points each</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contacts-list">
+                    <h3>Available Contacts (<span id="mode4-contact-count">0</span>)</h3>
+                    <div id="mode4-contacts-display"></div>
+                </div>
+                
+                <div class="setup-actions">
+                    <button onclick="showContactManager()" class="secondary">Manage Contacts</button>
+                    <button onclick="goHome()" class="secondary">Back to Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mode 4: Complete Input Game -->
+        <div id="mode4-game" class="screen">
+            <div class="game-header">
+                <div class="score">Score: <span id="mode4-score">0</span></div>
+                <div class="question-counter">Question <span id="mode4-current-question">1</span> of <span id="mode4-total-questions">10</span></div>
+                <div class="accuracy">Accuracy: <span id="mode4-accuracy">100%</span></div>
+            </div>
+            
+            <div class="question-container">
+                <h2 id="mode4-question-text">What is John's number?</h2>
+                
+                <div class="number-input-container">
+                    <input type="tel" id="mode4-number-input" placeholder="Enter 10-digit number" maxlength="10" autocomplete="off">
+                    <button onclick="submitMode4Answer()" id="mode4-submit-btn">Submit Answer</button>
+                </div>
+                
+                <div class="input-help">
+                    <p>💡 Tip: Take your time and think carefully!</p>
+                </div>
+                
+                <div class="feedback" id="mode4-feedback"></div>
+                
+                <div class="correct-answer" id="mode4-correct-answer" style="display: none;">
+                    <p>Correct answer was: <strong id="mode4-correct-number"></strong></p>
+                </div>
+            </div>
+            
+            <button onclick="nextMode4Question()" id="mode4-next-question" style="display: none;">Next Question</button>
+            <button onclick="finishMode4()" id="mode4-finish-game" style="display: none;">Finish Game</button>
+            <button onclick="goHome()" class="secondary">Back to Menu</button>
+        </div>
+
+        <!-- Mode 3: Sequence Recall -->
+        <div id="mode3-game" class="screen">
+            <div class="game-header">
+                <div class="score">Score: <span id="mode3-score">0</span></div>
+                <div class="level">Level <span id="mode3-level">1</span></div>
+                <div class="lives">Lives: <span id="mode3-lives">3</span></div>
+            </div>
+            
+            <div class="sequence-container">
+                <h2 id="mode3-instruction">Memorize this sequence:</h2>
+                
+                <div class="sequence-display" id="sequence-display">
+                    <!-- Numbers will be displayed here -->
+                </div>
+                
+                <div class="sequence-input" id="sequence-input" style="display: none;">
+                    <h3>Enter the sequence in order:</h3>
+                    <div id="sequence-inputs">
+                        <!-- Input fields will be generated -->
+                    </div>
+                    <button onclick="submitSequence()">Submit Sequence</button>
+                </div>
+                
+                <div class="countdown" id="sequence-countdown">3</div>
+            </div>
+            
+            <div class="feedback" id="mode3-feedback"></div>
+            <button onclick="nextLevel()" id="next-level" style="display: none;">Next Level</button>
+            <button onclick="finishMode3()" id="finish-mode3" style="display: none;">Game Over</button>
+            <button onclick="goHome()" class="secondary">Back to Menu</button>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="header">
+                <h2>🎉 Game Complete!</h2>
+            </div>
+            
+            <div class="results-container">
+                <div class="final-score">
+                    <h3>Your Score</h3>
+                    <div class="score-number" id="final-score">0</div>
+                </div>
+                
+                <div class="results-details" id="results-details">
+                    <!-- Game-specific results will be shown here -->
+                </div>
+                
+                <div class="results-actions">
+                    <button onclick="playAgain()">Play Again</button>
+                    <button onclick="goHome()" class="secondary">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
