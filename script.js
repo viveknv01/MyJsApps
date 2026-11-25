@@ -33,6 +33,8 @@ document.querySelectorAll('.project-card').forEach(card => {
             projectPath = 'Just-Calc_v1/index.html';
         } else if (project === 'memory-game') {
             projectPath = 'Mobile-Memory-Game/index.html';
+        } else if (project === 'task-list') {
+            projectPath = 'Task-List/index.html';
         }
         
         if (projectPath) {
@@ -88,6 +90,7 @@ class WalkingCat {
     }
 
     init() {
+        if (!this.cat) return;
         this.cat.style.left = this.x + 'px';
         this.cat.style.top = this.y + 'px';
         this.cat.classList.add(this.currentColor);
@@ -498,6 +501,8 @@ document.addEventListener('keydown', (e) => {
         navigateToProject('Just-Calc_v1/index.html');
     } else if (e.key === '3') {
         navigateToProject('Mobile-Memory-Game/index.html');
+    } else if (e.key === '4') {
+        navigateToProject('Task-List/index.html');
     } else if (e.key === 'c' || e.key === 'C') {
         // Press 'C' to change cat color
         if (walkingCat) {

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task List</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="home-button" href="../index.html">Home</a>
+
+  <div class="card">
+    <header>
+      <h1>Task List</h1>
+      <p>Paste today's work summary, save, then copy for WhatsApp or Sheet.</p>
+    </header>
+
+    <label class="sr-only" for="taskText">Today's task list</label>
+    <textarea id="taskText" rows="10" placeholder="Paste Task List here…"></textarea>
+
+    <div class="btn-grid">
+      <button type="button" id="saveBtn" class="btn primary">Save</button>
+      <button type="button" id="todayBtn" class="btn">Today task list</button>
+      <button type="button" id="whatsappBtn" class="btn">WhatsApp</button>
+      <button type="button" id="sheetBtn" class="btn">Sheet</button>
+    </div>
+
+    <p id="status" class="status" role="status">Nothing saved for today</p>
+
+    <details class="settings">
+      <summary>Settings</summary>
+      <label for="workerUrl">Worker URL</label>
+      <input id="workerUrl" type="url" autocomplete="off" />
+      <label for="authToken">Token</label>
+      <input id="authToken" type="password" autocomplete="off" />
+      <button type="button" id="saveSettingsBtn" class="btn">Save settings</button>
+    </details>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

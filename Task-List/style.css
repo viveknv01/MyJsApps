@@ -1,0 +1,141 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 72px 16px 24px;
+  color: #222;
+}
+
+.home-button {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 24px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  z-index: 10;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.96);
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+header {
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: 1.6rem;
+  margin-bottom: 6px;
+}
+
+header p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 1rem;
+  line-height: 1.45;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn {
+  min-height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: #eee;
+  color: #222;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 12px;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+}
+
+.status {
+  margin-top: 14px;
+  min-height: 1.4em;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.settings {
+  margin-top: 18px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.settings summary {
+  cursor: pointer;
+  font-weight: 600;
+  min-height: 36px;
+}
+
+.settings label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.settings input {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.settings .btn {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+@media (max-width: 420px) {
+  .btn-grid {
+    grid-template-columns: 1fr;
+  }
+}

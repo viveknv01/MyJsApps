@@ -1,0 +1,7 @@
+name = "task-list"
+main = "worker.js"
+compatibility_date = "2026-11-25"
+
+[[kv_namespaces]]
+binding = "TASKS"
+id = "REPLACE_WITH_KV_ID"
