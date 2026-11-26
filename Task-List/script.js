@@ -178,6 +178,16 @@ document.getElementById('todayBtn').addEventListener('click', async () => {
   }
 });
 
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const text = taskText.value.trim();
+  if (!text) {
+    setStatus('Nothing saved for today');
+    return;
+  }
+  await copyText(text);
+  setStatus('Copied');
+});
+
 document.getElementById('whatsappBtn').addEventListener('click', async () => {
   const text = taskText.value.trim();
   if (!text) {
