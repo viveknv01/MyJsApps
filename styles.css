@@ -14,6 +14,7 @@
     --calc: #2ee6c8;
     --memory: #ff5ca8;
     --clip: #5cc8ff;
+    --wildlife: #7dce6a;
 }
 
 html {
@@ -154,6 +155,7 @@ img {
 .project-card[data-project="just-calc"]:hover { border-color: rgba(46, 230, 200, 0.55); }
 .project-card[data-project="memory-game"]:hover { border-color: rgba(255, 92, 168, 0.55); }
 .project-card[data-project="task-list"]:hover { border-color: rgba(92, 200, 255, 0.55); }
+.project-card[data-project="wildlife-window"]:hover { border-color: rgba(125, 206, 106, 0.55); }
 
 .card-media {
     position: relative;
@@ -208,6 +210,10 @@ img {
     color: #04283a;
     background: var(--clip);
 }
+.project-card[data-project="wildlife-window"] .tag {
+    color: #10240c;
+    background: var(--wildlife);
+}
 
 .project-card h3 {
     font-size: clamp(1.15rem, 2.4vw, 1.4rem);
@@ -243,6 +249,7 @@ img {
 .project-card[data-project="just-calc"] .project-btn { background: linear-gradient(135deg, #7ff5e4, #2ee6c8); }
 .project-card[data-project="memory-game"] .project-btn { background: linear-gradient(135deg, #ff9dca, #ff5ca8); }
 .project-card[data-project="task-list"] .project-btn { background: linear-gradient(135deg, #9fe0ff, #5cc8ff); }
+.project-card[data-project="wildlife-window"] .project-btn { background: linear-gradient(135deg, #c8f0b4, #7dce6a); }
 
 .project-btn:hover {
     transform: translateY(-2px);
