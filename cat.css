@@ -1,0 +1,542 @@
+.cat-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1002;
+    background: rgba(8, 12, 24, 0.72);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.cat-toggle:hover {
+    background: rgba(12, 18, 36, 0.92);
+    transform: translateY(-2px);
+}
+
+.cat-toggle:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 3px;
+}
+
+.cat-toggle .toggle-icon {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.cat-toggle.cat-hidden .toggle-icon {
+    transform: rotate(180deg);
+}
+
+@media (max-width: 760px) {
+    .cat-toggle {
+        padding: 10px 12px;
+        right: 12px;
+        top: 12px;
+    }
+
+    .cat-toggle .toggle-text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+}
+
+.cat-container {
+    --fur: #d9893b;
+    --fur-dark: #a85f1c;
+    --fur-light: #f2b86a;
+    --inner-ear: #e8a090;
+    --eye-white: #f6ead4;
+    --pupil: #1a120c;
+    --nose: #c45b4a;
+    --w: 96px;
+    --h: 72px;
+    position: fixed;
+    left: 16px;
+    bottom: 10px;
+    z-index: 1000;
+    width: var(--w);
+    height: var(--h);
+    pointer-events: auto;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+}
+
+.cat-container:active,
+.cat-container.dragging {
+    cursor: grabbing;
+}
+
+.cat-container.dragging {
+    z-index: 1001;
+}
+
+.cat-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.cat-container.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cat-container.color-changing .cat {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.55));
+}
+
+.cat-shadow {
+    position: absolute;
+    left: 18px;
+    bottom: 2px;
+    width: 52px;
+    height: 8px;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.38), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.cat {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-origin: 50% 80%;
+}
+
+.cat-facing-left .cat {
+    transform: scaleX(-1);
+}
+
+.cat-body {
+    position: absolute;
+    left: 18px;
+    bottom: 16px;
+    width: 52px;
+    height: 28px;
+    background:
+        radial-gradient(18px 12px at 30% 30%, var(--fur-light), transparent 70%),
+        linear-gradient(180deg, var(--fur-light) 0%, var(--fur) 45%, var(--fur-dark) 100%);
+    border-radius: 22px 26px 18px 16px;
+    box-shadow: inset 0 -6px 8px rgba(0, 0, 0, 0.12);
+}
+
+.cat-belly {
+    position: absolute;
+    left: 10px;
+    bottom: 3px;
+    width: 30px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+}
+
+.cat-stripe {
+    position: absolute;
+    left: 16px;
+    top: 4px;
+    width: 22px;
+    height: 6px;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(0, 0, 0, 0.12) 4px,
+        rgba(0, 0, 0, 0.12) 7px
+    );
+    border-radius: 4px;
+}
+
+.cat-head {
+    position: absolute;
+    left: 48px;
+    bottom: 28px;
+    width: 36px;
+    height: 32px;
+    background:
+        radial-gradient(12px 10px at 35% 30%, var(--fur-light), transparent 70%),
+        linear-gradient(165deg, var(--fur-light), var(--fur) 50%, var(--fur-dark));
+    border-radius: 46% 48% 44% 42%;
+    z-index: 2;
+}
+
+.cat-ear {
+    position: absolute;
+    top: -8px;
+    width: 12px;
+    height: 16px;
+    background: var(--fur);
+    border-radius: 4px 10px 2px 8px;
+    transform-origin: bottom center;
+    overflow: hidden;
+}
+
+.cat-ear.left {
+    left: 3px;
+    transform: rotate(-18deg);
+}
+
+.cat-ear.right {
+    right: 3px;
+    transform: rotate(18deg);
+    border-radius: 10px 4px 8px 2px;
+}
+
+.cat-ear span {
+    display: block;
+    width: 7px;
+    height: 10px;
+    margin: 4px auto 0;
+    background: var(--inner-ear);
+    border-radius: 4px 4px 2px 2px;
+}
+
+.cat-muzzle {
+    position: absolute;
+    left: 8px;
+    bottom: 4px;
+    width: 20px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+}
+
+.cat-eye {
+    position: absolute;
+    top: 11px;
+    width: 9px;
+    height: 9px;
+    background: var(--eye-white);
+    border-radius: 50%;
+    overflow: hidden;
+    animation: nvCatBlink 4.2s infinite;
+}
+
+.cat-eye.left { left: 6px; }
+.cat-eye.right { right: 6px; }
+
+.cat-pupil {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 5px;
+    height: 6px;
+    background: var(--pupil);
+    border-radius: 50%;
+    box-shadow: inset -1px -1px 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.cat-nose {
+    position: absolute;
+    left: 50%;
+    bottom: 9px;
+    width: 6px;
+    height: 4px;
+    margin-left: -3px;
+    background: var(--nose);
+    border-radius: 40% 40% 60% 60%;
+    z-index: 2;
+}
+
+.cat-mouth {
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    width: 10px;
+    height: 5px;
+    margin-left: -5px;
+    border: 1.5px solid rgba(40, 24, 16, 0.7);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    z-index: 2;
+}
+
+.cat-whisker {
+    position: absolute;
+    bottom: 10px;
+    height: 1px;
+    width: 14px;
+    background: rgba(40, 24, 16, 0.45);
+    pointer-events: none;
+}
+
+.cat-whisker.l1 { left: -8px; transform: rotate(-8deg); }
+.cat-whisker.l2 { left: -8px; bottom: 7px; transform: rotate(8deg); }
+.cat-whisker.r1 { right: -8px; transform: rotate(8deg); }
+.cat-whisker.r2 { right: -8px; bottom: 7px; transform: rotate(-8deg); }
+
+.cat-leg {
+    position: absolute;
+    bottom: 6px;
+    width: 8px;
+    height: 16px;
+    background: linear-gradient(180deg, var(--fur), var(--fur-dark));
+    border-radius: 4px 4px 3px 3px;
+    transform-origin: top center;
+}
+
+.cat-leg.front-left { left: 28px; z-index: 2; }
+.cat-leg.front-right { left: 40px; }
+.cat-leg.back-left { left: 18px; }
+.cat-leg.back-right { left: 52px; z-index: 1; }
+
+.cat-paw {
+    position: absolute;
+    left: -1px;
+    bottom: -3px;
+    width: 10px;
+    height: 5px;
+    background: var(--fur-dark);
+    border-radius: 40% 40% 50% 50%;
+}
+
+.cat-tail {
+    position: absolute;
+    left: 8px;
+    bottom: 28px;
+    width: 8px;
+    height: 34px;
+    background: linear-gradient(180deg, var(--fur-dark), var(--fur));
+    border-radius: 8px;
+    transform-origin: bottom center;
+    transform: rotate(-28deg);
+    animation: nvCatTailWalk 0.9s ease-in-out infinite;
+}
+
+.cat-container.cat-walking .cat-leg.front-left,
+.cat-container.cat-walking .cat-leg.back-right {
+    animation: nvCatStride 0.42s ease-in-out infinite;
+}
+
+.cat-container.cat-walking .cat-leg.front-right,
+.cat-container.cat-walking .cat-leg.back-left {
+    animation: nvCatStride 0.42s ease-in-out infinite reverse;
+}
+
+.cat-container.cat-walking .cat {
+    animation: nvCatBob 0.42s ease-in-out infinite;
+}
+
+.cat-container.cat-sitting .cat-body {
+    height: 24px;
+    bottom: 12px;
+    border-radius: 20px;
+}
+
+.cat-container.cat-sitting .cat-leg {
+    height: 10px;
+    bottom: 8px;
+    animation: none;
+}
+
+.cat-container.cat-sitting .cat-head {
+    bottom: 22px;
+}
+
+.cat-container.cat-sitting .cat-tail {
+    animation: nvCatTailSit 2.2s ease-in-out infinite;
+    transform: rotate(-12deg);
+}
+
+.cat-container.cat-sleeping .cat-eye,
+.cat-container.cat-sleeping .cat-pupil {
+    animation: none;
+}
+
+.cat-container.cat-sleeping .cat-eye {
+    height: 3px;
+    top: 14px;
+    border-radius: 4px;
+    background: var(--fur-dark);
+}
+
+.cat-container.cat-sleeping .cat-pupil {
+    display: none;
+}
+
+.cat-container.cat-sleeping .cat {
+    animation: nvCatBreathe 2.8s ease-in-out infinite;
+}
+
+.cat-container.cat-sleeping .cat-tail {
+    animation: nvCatTailSit 3s ease-in-out infinite;
+}
+
+.cat-container.cat-petting .cat {
+    animation: nvCatPurr 0.35s ease-in-out 4;
+}
+
+.cat-container.cat-startle .cat {
+    animation: nvCatStartle 0.45s ease-out;
+}
+
+.cat-tabby {
+    --fur: #d9893b;
+    --fur-dark: #a85f1c;
+    --fur-light: #f2b86a;
+}
+
+.cat-gray {
+    --fur: #8b95a1;
+    --fur-dark: #5d6772;
+    --fur-light: #c5ccd3;
+    --inner-ear: #d7b0aa;
+}
+
+.cat-tuxedo {
+    --fur: #2c2c2e;
+    --fur-dark: #161618;
+    --fur-light: #4a4a4e;
+    --inner-ear: #e8b4ae;
+    --eye-white: #efe6c9;
+}
+
+.cat-tuxedo .cat-belly,
+.cat-tuxedo .cat-muzzle {
+    background: rgba(245, 245, 248, 0.92);
+}
+
+.cat-cream {
+    --fur: #f0d5b0;
+    --fur-dark: #d4b48a;
+    --fur-light: #faead4;
+    --inner-ear: #efb3ad;
+    --nose: #e0897c;
+}
+
+.cat-purple {
+    --fur: #9b59c7;
+    --fur-dark: #6e348f;
+    --fur-light: #c58be6;
+    --inner-ear: #e8a0c8;
+}
+
+.cat-blue {
+    --fur: #4aa3d9;
+    --fur-dark: #2a6fa3;
+    --fur-light: #8ec8ee;
+    --inner-ear: #f0c0b8;
+}
+
+.cat-green {
+    --fur: #5aaa62;
+    --fur-dark: #37733e;
+    --fur-light: #8fd196;
+    --inner-ear: #e8b0a8;
+}
+
+.nv-cat-heart {
+    position: fixed;
+    z-index: 1003;
+    pointer-events: none;
+    font-size: 16px;
+    animation: nvCatHeart 1.2s ease-out forwards;
+}
+
+@keyframes nvCatBlink {
+    0%, 88%, 100% { transform: scaleY(1); }
+    92% { transform: scaleY(0.08); }
+}
+
+@keyframes nvCatStride {
+    0%, 100% { transform: rotate(12deg) translateY(0); }
+    50% { transform: rotate(-16deg) translateY(-3px); }
+}
+
+@keyframes nvCatBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+}
+
+.cat-facing-left.cat-walking .cat {
+    animation: nvCatBobLeft 0.42s ease-in-out infinite;
+}
+
+@keyframes nvCatBobLeft {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-2px); }
+}
+
+@keyframes nvCatTailWalk {
+    0%, 100% { transform: rotate(-22deg); }
+    50% { transform: rotate(-42deg); }
+}
+
+@keyframes nvCatTailSit {
+    0%, 100% { transform: rotate(-8deg); }
+    50% { transform: rotate(18deg); }
+}
+
+@keyframes nvCatBreathe {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(1px) scale(1.02, 0.98); }
+}
+
+.cat-facing-left.cat-sleeping .cat {
+    animation: nvCatBreatheLeft 2.8s ease-in-out infinite;
+}
+
+@keyframes nvCatBreatheLeft {
+    0%, 100% { transform: scaleX(-1) translateY(0) scale(1); }
+    50% { transform: scaleX(-1) translateY(1px) scale(1.02, 0.98); }
+}
+
+@keyframes nvCatPurr {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.cat-facing-left.cat-petting .cat {
+    animation: nvCatPurrLeft 0.35s ease-in-out 4;
+}
+
+@keyframes nvCatPurrLeft {
+    0%, 100% { transform: scaleX(-1) scale(1); }
+    50% { transform: scaleX(-1) scale(1.08); }
+}
+
+@keyframes nvCatStartle {
+    0% { transform: translateY(0); }
+    40% { transform: translateY(-14px); }
+    100% { transform: translateY(0); }
+}
+
+.cat-facing-left.cat-startle .cat {
+    animation: nvCatStartleLeft 0.45s ease-out;
+}
+
+@keyframes nvCatStartleLeft {
+    0% { transform: scaleX(-1) translateY(0); }
+    40% { transform: scaleX(-1) translateY(-14px); }
+    100% { transform: scaleX(-1) translateY(0); }
+}
+
+@keyframes nvCatHeart {
+    0% { opacity: 1; transform: translateY(0) scale(0.7); }
+    100% { opacity: 0; transform: translateY(-42px) scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cat-container .cat,
+    .cat-container .cat-leg,
+    .cat-container .cat-tail,
+    .cat-container .cat-eye {
+        animation: none !important;
+    }
+}
