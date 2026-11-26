@@ -2,6 +2,7 @@ const NAME = 'Vivek';
 const DEFAULT_WORKER_URL = 'https://task-list.projectsbynv.workers.dev';
 const LS_URL = 'task-list-worker-url';
 const LS_TOKEN = 'task-list-auth-token';
+const LS_THEME = 'task-list-theme';
 
 const taskText = document.getElementById('taskText');
 const statusEl = document.getElementById('status');
@@ -28,9 +29,16 @@ function setStatus(msg) {
   statusEl.textContent = msg;
 }
 
+function applyTheme(dark) {
+  document.documentElement.classList.toggle('dark', dark);
+  const themeBtn = document.getElementById('themeBtn');
+  if (themeBtn) themeBtn.textContent = dark ? 'Light mode' : 'Dark mode';
+}
+
 function loadSettings() {
   workerUrlEl.value = localStorage.getItem(LS_URL) || DEFAULT_WORKER_URL;
   authTokenEl.value = localStorage.getItem(LS_TOKEN) || '';
+  applyTheme(localStorage.getItem(LS_THEME) === 'dark');
 }
 
 function workerBase() {
@@ -105,6 +113,12 @@ async function api(method, date, text) {
   }
   return { res, data };
 }
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const dark = !document.documentElement.classList.contains('dark');
+  localStorage.setItem(LS_THEME, dark ? 'dark' : 'light');
+  applyTheme(dark);
+});
 
 document.getElementById('saveSettingsBtn').addEventListener('click', () => {
   localStorage.setItem(LS_URL, workerBase());

@@ -3,24 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Task List</title>
+  <title>Personal Clipboard</title>
   <link rel="stylesheet" href="style.css" />
+  <script>
+    if (localStorage.getItem('task-list-theme') === 'dark') {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
 </head>
 <body>
   <a class="home-button" href="../index.html">Home</a>
 
   <div class="card">
+    <div class="clip" aria-hidden="true"></div>
     <header>
-      <h1>Task List</h1>
-      <p>Paste today's work summary, save, then copy for WhatsApp or Sheet.</p>
+      <h1>Personal Clipboard</h1>
+      <p>Save text here. Open it on your other device.</p>
     </header>
 
-    <label class="sr-only" for="taskText">Today's task list</label>
-    <textarea id="taskText" rows="10" placeholder="Paste Task List here…"></textarea>
+    <label class="sr-only" for="taskText">Clipboard text</label>
+    <textarea id="taskText" rows="10" placeholder="Paste text here…"></textarea>
 
     <div class="btn-grid">
       <button type="button" id="saveBtn" class="btn primary">Save</button>
-      <button type="button" id="todayBtn" class="btn">Today task list</button>
+      <button type="button" id="todayBtn" class="btn">Fetch</button>
       <button type="button" id="copyBtn" class="btn">Copy</button>
       <button type="button" id="whatsappBtn" class="btn">WhatsApp</button>
       <button type="button" id="sheetBtn" class="btn">Sheet</button>
@@ -30,6 +36,7 @@
 
     <details class="settings">
       <summary>Settings</summary>
+      <button type="button" id="themeBtn" class="btn">Dark mode</button>
       <label for="workerUrl">Worker URL</label>
       <input id="workerUrl" type="url" autocomplete="off" />
       <label for="authToken">Token</label>
